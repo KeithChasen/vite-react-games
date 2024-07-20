@@ -14,14 +14,16 @@ export class Fighter {
         x: null,
         y: null,
         width: 150,
-        height: 50
+        height: 50,
+        show: false,
     }
 
     legKickMask = {
         x: null,
         y: null,
         width: 250,
-        height: 70
+        height: 70,
+        show: false,
     }
 
     constructor(x, y, canvas, ctx) {
@@ -55,20 +57,25 @@ export class Fighter {
         // draw kick masks
         this.ctx.fillStyle = 'red';
 
-        this.ctx.fillRect(
-            this.handKickMask.x,
-            this.handKickMask.y,
-            this.handKickMask.width,
-            this.handKickMask.height
-        );
+        if (this.handKickMask.show) {
+            this.ctx.fillRect(
+                this.handKickMask.x,
+                this.handKickMask.y,
+                this.handKickMask.width,
+                this.handKickMask.height
+            );
+        }
+        
 
         this.ctx.fillStyle = 'green';
 
-        this.ctx.fillRect(
-            this.legKickMask.x,
-            this.legKickMask.y,
-            this.legKickMask.width,
-            this.legKickMask.height
-        );
+        if (this.legKickMask.show) {
+            this.ctx.fillRect(
+                this.legKickMask.x,
+                this.legKickMask.y,
+                this.legKickMask.width,
+                this.legKickMask.height
+            );
+        }
     }
 }
