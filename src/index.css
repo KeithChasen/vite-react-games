@@ -1,0 +1,23 @@
+body {
+    background: grey;
+    margin: 0;
+    padding: 0;
+}
+
+nav {
+    height: 2rem;
+    background: darkgray;
+    padding: .5rem;
+    display: flex;
+    align-items: center;
+}
+
+nav a {
+    margin: 1rem;
+    text-decoration: none;
+    color: white;
+}
+
+nav a:hover {
+    color: black;
+}
