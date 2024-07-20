@@ -13,7 +13,8 @@ function Fighting() {
                 100, 
                 canvas.height - 500, 
                 canvas, 
-                c
+                c,
+                'v' // todo: select fighter and pass it here
             )
             : null;
         

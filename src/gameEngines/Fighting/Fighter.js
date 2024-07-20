@@ -1,8 +1,24 @@
+import VioletFighter from './images/sprites/32/v-40.png';
+import BlackFighter from './images/sprites/32/d-40.png';
+import GreenFighter from './images/sprites/32/g-40.png';
+import BlueFighter from './images/sprites/32/b-40.png';
+import RedFighter from './images/sprites/32/r-40.png';
+
+const fighterSheetsMap = {
+    v: VioletFighter,
+    d: BlackFighter,
+    g: GreenFighter,
+    b: BlueFighter,
+    r: RedFighter
+}
+
 export class Fighter {
     position = {
         x: null,
         y: null
     }
+
+    spriteSheet = null;
 
     canvas = null;
     ctx = null;
@@ -29,12 +45,22 @@ export class Fighter {
         show: true,
     }
 
-    constructor(x, y, canvas, ctx) {
+    constructor(x, y, canvas, ctx, spriteSheet) {
         this.position.x = x;
         this.position.y = y;
         this.canvas = canvas;
         this.ctx = ctx;
+        
+        if (spriteSheet) {
+            this.setSpriteSheet(spriteSheet);
+        }
     }
+
+    setSpriteSheet(spriteSheet) {
+        this.spriteSheet = new Image();
+        this.spriteSheet.src = fighterSheetsMap[spriteSheet];
+    }
+
 
     useGravity() {
         if (this.position.y !== null && this.canvas) {
@@ -92,19 +118,31 @@ export class Fighter {
     draw() {
         this.useGravity();
 
+        if (this.spriteSheet) {
+            this.ctx.drawImage(
+                this.spriteSheet,
+                0,0,
+                100, 100,
+                this.position.x,
+                this.position.y,
+                this.width,
+                this.height
+            );
+        }
+
 
         // draw player
-        this.ctx.fillStyle = 'black';
+        // this.ctx.fillStyle = 'black';
 
-        this.ctx.fillRect(
-            this.position.x,
-            this.position.y,
-            this.width,
-            this.height
-        );
+        // this.ctx.fillRect(
+        //     this.position.x,
+        //     this.position.y,
+        //     this.width,
+        //     this.height
+        // );
 
         // draw kick masks
-        this.drawHandKickMask();
-        this.drawLegKickMask();
+        // this.drawHandKickMask();
+        // this.drawLegKickMask();
     }
 }

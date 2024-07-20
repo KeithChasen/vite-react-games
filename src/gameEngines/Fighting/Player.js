@@ -4,8 +4,8 @@ import { Fighter } from "./Fighter";
 export class Player extends Fighter {
     controls = null;
 
-    constructor(x, y, canvas, ctx) {
-        super(x, y, canvas, ctx);
+    constructor(x, y, canvas, ctx, spriteSheet) {
+        super(x, y, canvas, ctx, spriteSheet);
         this.controls = new Controls();
     }
 
