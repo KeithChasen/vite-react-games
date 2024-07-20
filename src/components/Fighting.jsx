@@ -9,12 +9,22 @@ function Fighting() {
         const c = canvas?.getContext('2d');
 
         const player = canvas && c ?
-            new Player(10, 10, canvas, c)
+            new Player(
+                100, 
+                canvas.height - 500, 
+                canvas, 
+                c
+            )
             : null;
         
         const animate = () => {
             requestAnimationFrame(animate);
-            player.draw();
+            if (c && canvas && player) {
+                c.clearRect(0, 0, canvas.width, canvas.height)
+                player.update();
+                player.draw();
+            }
+            
         }
     
         if (canvas) {
