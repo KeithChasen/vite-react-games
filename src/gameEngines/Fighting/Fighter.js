@@ -15,7 +15,7 @@ export class Fighter {
         y: null,
         width: 150,
         height: 50,
-        show: false,
+        show: true,
     }
 
     legKickMask = {
@@ -23,7 +23,7 @@ export class Fighter {
         y: null,
         width: 250,
         height: 70,
-        show: false,
+        show: true,
     }
 
     constructor(x, y, canvas, ctx) {
@@ -43,6 +43,32 @@ export class Fighter {
         }
     }
 
+    drawHandKickMask() {
+        this.ctx.fillStyle = 'red';
+
+        if (this.handKickMask.show) {
+            this.ctx.fillRect(
+                this.handKickMask.x,
+                this.handKickMask.y,
+                this.handKickMask.width,
+                this.handKickMask.height
+            );
+        }
+    }
+
+    drawLegKickMask() {
+        this.ctx.fillStyle = 'green';
+
+        if (this.legKickMask.show) {
+            this.ctx.fillRect(
+                this.legKickMask.x,
+                this.legKickMask.y,
+                this.legKickMask.width,
+                this.legKickMask.height
+            );
+        }
+    }
+
     draw() {
         // draw player
         this.ctx.fillStyle = 'black';
@@ -55,27 +81,7 @@ export class Fighter {
         );
 
         // draw kick masks
-        this.ctx.fillStyle = 'red';
-
-        if (this.handKickMask.show) {
-            this.ctx.fillRect(
-                this.handKickMask.x,
-                this.handKickMask.y,
-                this.handKickMask.width,
-                this.handKickMask.height
-            );
-        }
-        
-
-        this.ctx.fillStyle = 'green';
-
-        if (this.legKickMask.show) {
-            this.ctx.fillRect(
-                this.legKickMask.x,
-                this.legKickMask.y,
-                this.legKickMask.width,
-                this.legKickMask.height
-            );
-        }
+        this.drawHandKickMask();
+        this.drawLegKickMask();
     }
 }
