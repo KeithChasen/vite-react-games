@@ -1,18 +1,28 @@
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
+import { Player } from "../gameEngines/Fighting/Player";
 
 function Fighting() {
     const canvasRef = useRef(null);
-    const canvas = canvasRef?.current;
-    const c = canvas?.getContext('2d');
 
-    if (canvas) {
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
+    useEffect(() => {        
+        const canvas = canvasRef?.current;
+        const c = canvas?.getContext('2d');
 
-        console.log({
-            canvas, c
-        });
-    }
+        const player = canvas && c ?
+            new Player(10, 10, canvas, c)
+            : null;
+        
+        const animate = () => {
+            requestAnimationFrame(animate);
+            player.draw();
+        }
+    
+        if (canvas) {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            animate();
+        }
+    }, []);
 
     return (
         <>
