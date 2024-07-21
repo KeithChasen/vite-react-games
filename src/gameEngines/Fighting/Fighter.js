@@ -61,6 +61,34 @@ export class Fighter {
         this.spriteSheet.src = fighterSheetsMap[spriteSheet];
     }
 
+    drawSprite() {
+        if (this.spriteSheet) {
+            const oneImageSize = 32;
+            const xStart = 1;
+            const yStart = 0;
+            const clipWidth = 32;
+            const clipHeight = 32;
+            const placeImageX = this.position.x
+            const placeImageY = this.position.y
+            const widthImage = this.height; // because our sprite is square
+            const heightImage = this.height;
+
+            this.ctx.imageSmoothingEnabled = false;
+
+            this.ctx.drawImage(
+                this.spriteSheet,
+                xStart * oneImageSize,
+                yStart * oneImageSize,
+                clipWidth,
+                clipHeight,
+                placeImageX,
+                placeImageY,
+                widthImage,
+                heightImage,
+            );
+
+        }
+    }
 
     useGravity() {
         if (this.position.y !== null && this.canvas) {
@@ -118,17 +146,7 @@ export class Fighter {
     draw() {
         this.useGravity();
 
-        if (this.spriteSheet) {
-            this.ctx.drawImage(
-                this.spriteSheet,
-                0,0,
-                100, 100,
-                this.position.x,
-                this.position.y,
-                this.width,
-                this.height
-            );
-        }
+        this.drawSprite();
 
 
         // draw player
