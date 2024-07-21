@@ -1,16 +1,4 @@
-import VioletFighter from './images/sprites/32/v-40.png';
-import BlackFighter from './images/sprites/32/d-40.png';
-import GreenFighter from './images/sprites/32/g-40.png';
-import BlueFighter from './images/sprites/32/b-40.png';
-import RedFighter from './images/sprites/32/r-40.png';
-
-const fighterSheetsMap = {
-    v: VioletFighter,
-    d: BlackFighter,
-    g: GreenFighter,
-    b: BlueFighter,
-    r: RedFighter
-}
+import { SpriteSheet } from "./SpriteSheet";
 
 export class Fighter {
     position = {
@@ -52,41 +40,17 @@ export class Fighter {
         this.ctx = ctx;
         
         if (spriteSheet) {
-            this.setSpriteSheet(spriteSheet);
+            this.spriteSheet = new SpriteSheet(spriteSheet, ctx);
         }
-    }
-
-    setSpriteSheet(spriteSheet) {
-        this.spriteSheet = new Image();
-        this.spriteSheet.src = fighterSheetsMap[spriteSheet];
     }
 
     drawSprite() {
         if (this.spriteSheet) {
-            const oneImageSize = 32;
-            const xStart = 1;
-            const yStart = 0;
-            const clipWidth = 32;
-            const clipHeight = 32;
-            const placeImageX = this.position.x
-            const placeImageY = this.position.y
-            const widthImage = this.height; // because our sprite is square
-            const heightImage = this.height;
-
-            this.ctx.imageSmoothingEnabled = false;
-
-            this.ctx.drawImage(
-                this.spriteSheet,
-                xStart * oneImageSize,
-                yStart * oneImageSize,
-                clipWidth,
-                clipHeight,
-                placeImageX,
-                placeImageY,
-                widthImage,
-                heightImage,
-            );
-
+            this.spriteSheet.draw(
+                this.position.x,
+                this.position.y,
+                this.height
+            )
         }
     }
 
